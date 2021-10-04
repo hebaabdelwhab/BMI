@@ -21,13 +21,37 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Row(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            m1Expended(context, 'male'),
-            const SizedBox(
-              width: 15,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    m1Expended(context, 'male'),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    m1Expended(context, 'female'),
+                  ],
+                ),
+              ),
             ),
-            m1Expended(context, 'female'),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    m2Expended(context, 'Age'),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    m2Expended(context, 'Weight'),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -52,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Type == 'male' ? Icons.male : Icons.female),
+              Icon(Type == 'male' ? Icons.male : Icons.female,size: 90),
               const SizedBox(height: 15),
               Text(
                 Type == 'male' ? 'Male' : 'Female',
@@ -60,6 +84,56 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Expanded m2Expended(BuildContext context, String Type) {
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.blueGrey,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              Type == 'Age' ? 'Age' : 'Weight',
+              style: Theme.of(context).textTheme.headline2,
+            ),
+            const SizedBox(height: 15),
+            Text(
+              Type == 'Age' ? '$age' : '$weight',
+              style: Theme.of(context).textTheme.headline1,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  heroTag:Type == 'Age' ?'age--':'weight--',
+                  onPressed: () {
+                    setState(() {
+                      Type == 'Age' ?age--:weight--;
+                    });
+                  },
+                  child: const Icon(Icons.remove),
+                  mini: true,
+                ),
+                FloatingActionButton(
+                  heroTag:Type == 'Age' ?'Age++':'Weight++',
+                  onPressed: () {
+                    setState(() {
+                      Type == 'Age' ?age++:weight++;
+                    });
+                  },
+                  child: const Icon(Icons.add),
+                  mini: true,
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
