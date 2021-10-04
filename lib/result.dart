@@ -27,8 +27,8 @@ class Result extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text('Gender : ${isMale?'male':'female'}' , style: Theme.of(context).textTheme.headline2),
-              Text('Result : ${result.toStringAsFixed(2)}' , style: Theme.of(context).textTheme.headline2),
+              Text('Gender : ${isMale?'male':'female'}' , style: Theme.of(context).textTheme.headline1),
+              Text('Result : ${result.toStringAsFixed(2)}' , style: Theme.of(context).textTheme.headline1),
               Text('Healthiness : $resultPhases' , style: Theme.of(context).textTheme.headline2,textAlign: TextAlign.center,),
               Text('Age : $age' , style: Theme.of(context).textTheme.headline2),
             ],
