@@ -22,7 +22,12 @@ class MyApp extends StatelessWidget {
             headline2: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
-                color: Colors.black)),
+                color: Colors.black),
+            bodyText1: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black),
+        ),
       ),
       home: const MyHomePage(),
     );

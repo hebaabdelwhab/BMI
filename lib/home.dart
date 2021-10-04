@@ -8,11 +8,13 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   bool isMale = false;
-  double highVal = 170;
+  double heightVal = 170;
   int weight = 55;
   int age = 18;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,47 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(
               child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blueGrey,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Height',
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        textBaseline: TextBaseline.alphabetic,
+                        children: [
+                          Text('${heightVal.toStringAsFixed(1)}',
+                              style: Theme.of(context).textTheme.headline1),
+                          Text('CM',
+                              style: Theme.of(context).textTheme.bodyText1),
+                        ],
+                      ),
+                      Slider(
+                        min: 90,
+                        max: 220,
+                        value: heightVal,
+                        onChanged: (NewValue) {
+                          setState(() {
+                            heightVal = NewValue;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: [
@@ -58,10 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
               height: MediaQuery.of(context).size.height / 16,
               child: TextButton(
                 onPressed: () {
-                  var result = weight /pow(highVal/100,2) ;
+                  var result = weight / pow(heightVal / 100, 2);
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) {
-                      return Result(age: age, isMale: isMale, result:result);
+                      return Result(age: age, isMale: isMale, result: result);
                     },
                   ));
                 },
@@ -76,6 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
   Expanded m1Expended(BuildContext context, String Type) {
     return Expanded(
       child: GestureDetector(
@@ -106,6 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
+
   Expanded m2Expended(BuildContext context, String Type) {
     return Expanded(
       child: Container(
@@ -138,7 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Icon(Icons.remove),
                   mini: true,
                 ),
-                SizedBox(width:8),
+                SizedBox(width: 8),
                 FloatingActionButton(
                   heroTag: Type == 'Age' ? 'Age++' : 'Weight++',
                   onPressed: () {
